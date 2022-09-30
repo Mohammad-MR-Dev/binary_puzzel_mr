@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'count_row.dart';
+
 class SelectButton extends StatefulWidget {
   final String value;
   const SelectButton({Key? key, required this.value}) : super(key: key);
@@ -21,6 +23,12 @@ class _SelectButtonState extends State<SelectButton> {
                   isSelected ? Colors.green : Colors.transparent)),
           onPressed: () {
             isSelected = !isSelected;
+            if (isSelected) {
+              CountRowState.increment();
+            } else {
+              CountRowState.decrement();
+            }
+
             setState(() {});
           },
           child: Text(

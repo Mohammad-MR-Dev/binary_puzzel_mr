@@ -24,10 +24,6 @@ Happy birthday rinad, I love you.''';
       margin: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       child: Wrap(
-        // shrinkWrap: true,
-        // mainAxisSpacing: 3.0,
-        // crossAxisSpacing: 3.0,
-        // crossAxisCount: 7,
         children: list.map((e) => _button(e)).toList(),
       ),
     );

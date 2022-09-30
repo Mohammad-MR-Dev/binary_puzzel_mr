@@ -2,6 +2,7 @@ import 'package:binary_puzzel_mr/select_button.dart';
 import 'package:flutter/material.dart';
 
 import 'buttons_keyboard.dart';
+import 'count_row.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -43,25 +44,25 @@ class _ScreenBodyState extends State<_ScreenBody> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.5,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildQ,
-              const SizedBox(height: 10.0),
-              TextField(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildQ,
+            const CountRow(),
+            const SizedBox(height: 10.0),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: TextField(
                   controller: textEditingController,
                   readOnly: true,
                   maxLines: 4,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       suffixIcon: _clearButton)),
-              Expanded(
-                  child:
-                      SizedBox(child: ButtonKeyboard(onPressed: _updateText))),
-            ],
-          ),
+            ),
+            Expanded(
+                child: SizedBox(child: ButtonKeyboard(onPressed: _updateText))),
+          ],
         ),
       ),
     );
