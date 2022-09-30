@@ -23,11 +23,11 @@ Happy birthday rinad, I love you.''';
     return Container(
       margin: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      child: GridView.count(
-        shrinkWrap: true,
-        mainAxisSpacing: 3.0,
-        crossAxisSpacing: 3.0,
-        crossAxisCount: 7,
+      child: Wrap(
+        // shrinkWrap: true,
+        // mainAxisSpacing: 3.0,
+        // crossAxisSpacing: 3.0,
+        // crossAxisCount: 7,
         children: list.map((e) => _button(e)).toList(),
       ),
     );

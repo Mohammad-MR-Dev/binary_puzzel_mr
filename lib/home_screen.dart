@@ -44,28 +44,22 @@ class _ScreenBodyState extends State<_ScreenBody> {
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.5 - 50,
-          child: Row(
+          width: MediaQuery.of(context).size.width / 1.5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildQ,
+              const SizedBox(height: 10.0),
+              TextField(
+                  controller: textEditingController,
+                  readOnly: true,
+                  maxLines: 4,
+                  decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      suffixIcon: _clearButton)),
               Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextField(
-                        controller: textEditingController,
-                        readOnly: true,
-                        maxLines: 4,
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            suffixIcon: _clearButton)),
-                    Expanded(
-                      child: SizedBox(
-                          child: ButtonKeyboard(onPressed: _updateText)),
-                    ),
-                  ],
-                ),
-              ),
+                  child:
+                      SizedBox(child: ButtonKeyboard(onPressed: _updateText))),
             ],
           ),
         ),
@@ -76,8 +70,9 @@ class _ScreenBodyState extends State<_ScreenBody> {
   Widget get _buildQ {
     List<String> values = widget._q.split(' ');
     return SingleChildScrollView(
-        child: Column(
-            children: values.map((e) => SelectButton(value: e)).toList()));
+        scrollDirection: Axis.horizontal,
+        child:
+            Row(children: values.map((e) => SelectButton(value: e)).toList()));
   }
 
   Widget get _clearButton =>
