@@ -27,9 +27,6 @@ class _ScreenBody extends StatefulWidget {
   Happy birthday rinad, I love you.
   ''';
 
-  final String _q =
-      '01001101 01101001 01110011 01110011 00100000 01111001 01101111 01110101 11000010 10100000 01101001 01101110 00100000 01100101 01110110 01100101 01110010 01111001 00100000 01101000 01100101 01100001 01110010 01110100 00100000 01110000 01110101 01101100 01110011 01100101 00100000 00101100 00100000 01010111 01101001 01110100 01101000 01101111 01110101 01110100 00100000 01111001 01101111 01110101 00100000 01001001 00100111 01101101 11000010 10100000 01101110 01101111 01110100 01101000 01101001 01101110 01100111 00101100 01110111 01101001 01110100 01101000 00100000 01111001 01101111 01110101 00100000 01001001 00100111 01101101 00100000 01110011 01101111 01101101 01100101 01110100 01101000 01101001 01101110 01100111 00100000 00101100 00100000 01100010 01110101 01110100 00100000 01110100 01101111 01100111 01100101 01110100 01101000 01100101 01110010 00100000 01001001 00100000 01101000 01100001 01110110 01100101 00100000 01100101 01110110 01100101 01110010 01111001 01110100 01101000 01101001 01101110 01100111 00101110 00100000 01001000 01100001 01110000 01110000 01111001 00100000 01100010 01101001 01110010 01110100 01101000 01100100 01100001 01111001 00100000 01110010 01101001 01101110 01100001 01100100 00101100 01001001 00100000 01101100 01101111 01110110 01100101 00100000 01111001 01101111 01110101 00101110';
-
   const _ScreenBody({Key? key}) : super(key: key);
 
   @override
@@ -42,38 +39,31 @@ class _ScreenBodyState extends State<_ScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(
+      padding: const EdgeInsets.all(2.0),
+      child: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _buildQ,
-            const CountRow(),
+            const BuildValues(),
+            const SizedBox(height: 10.0),
             const SizedBox(height: 10.0),
             SizedBox(
-              width: MediaQuery.of(context).size.width / 1.5,
+              width: MediaQuery.of(context).size.width - 50,
               child: TextField(
                   controller: textEditingController,
                   readOnly: true,
+                  enabled: true,
+                  cursorColor: Colors.red,
                   maxLines: 4,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       suffixIcon: _clearButton)),
             ),
-            Expanded(
-                child: SizedBox(child: ButtonKeyboard(onPressed: _updateText))),
+            ButtonKeyboard(onPressed: _updateText),
           ],
         ),
       ),
     );
-  }
-
-  Widget get _buildQ {
-    List<String> values = widget._q.split(' ');
-    return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child:
-            Row(children: values.map((e) => SelectButton(value: e)).toList()));
   }
 
   Widget get _clearButton =>
@@ -87,5 +77,55 @@ class _ScreenBodyState extends State<_ScreenBody> {
     if (textEditingController.text.isEmpty) return;
     String val = textEditingController.text;
     textEditingController.text = val.substring(0, val.length - 1);
+  }
+}
+
+class BuildValues extends StatefulWidget {
+  final String _q =
+      '01001101 01101001 01110011 01110011 00100000 01111001 01101111 01110101 11000010 10100000 01101001 01101110 00100000 01100101 01110110 01100101 01110010 01111001 00100000 01101000 01100101 01100001 01110010 01110100 00100000 01110000 01110101 01101100 01110011 01100101 00100000 00101100 00100000 01010111 01101001 01110100 01101000 01101111 01110101 01110100 00100000 01111001 01101111 01110101 00100000 01001001 00100111 01101101 11000010 10100000 01101110 01101111 01110100 01101000 01101001 01101110 01100111 00101100 01110111 01101001 01110100 01101000 00100000 01111001 01101111 01110101 00100000 01001001 00100111 01101101 00100000 01110011 01101111 01101101 01100101 01110100 01101000 01101001 01101110 01100111 00100000 00101100 00100000 01100010 01110101 01110100 00100000 01110100 01101111 01100111 01100101 01110100 01101000 01100101 01110010 00100000 01001001 00100000 01101000 01100001 01110110 01100101 00100000 01100101 01110110 01100101 01110010 01111001 01110100 01101000 01101001 01101110 01100111 00101110 00100000 01001000 01100001 01110000 01110000 01111001 00100000 01100010 01101001 01110010 01110100 01101000 01100100 01100001 01111001 00100000 01110010 01101001 01101110 01100001 01100100 00101100 01001001 00100000 01101100 01101111 01110110 01100101 00100000 01111001 01101111 01110101 00101110';
+
+  const BuildValues({Key? key}) : super(key: key);
+
+  @override
+  State<BuildValues> createState() => _BuildValuesState();
+}
+
+class _BuildValuesState extends State<BuildValues> {
+  int get len => widget._q.split(' ').length;
+
+  int count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      _buildQ,
+      CountRow(len: len, count: count),
+    ]);
+  }
+
+  Widget get _buildQ {
+    List<String> values = widget._q.split(' ');
+    return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+            children: values
+                .map((e) => SelectButton(
+                      value: e,
+                      decrement: decrement,
+                      increment: increment,
+                    ))
+                .toList()));
+  }
+
+  void increment() {
+    count += 1;
+    setState(() {});
+  }
+
+  void decrement() {
+    if (count != 0) {
+      count -= 1;
+    }
+    setState(() {});
   }
 }

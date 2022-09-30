@@ -21,7 +21,7 @@ Happy birthday rinad, I love you.''';
     List<String> list = keys;
     list.shuffle();
     return Container(
-      margin: const EdgeInsets.all(20.0),
+      margin: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       child: Wrap(
         children: list.map((e) => _button(e)).toList(),
@@ -31,7 +31,7 @@ Happy birthday rinad, I love you.''';
 
   Widget _button(String key) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(2.0),
       child: TextButton(
           style: ButtonStyle(
             shape: MaterialStateProperty.all(RoundedRectangleBorder(

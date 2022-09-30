@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'count_row.dart';
-
 class SelectButton extends StatefulWidget {
   final String value;
-  const SelectButton({Key? key, required this.value}) : super(key: key);
+  final VoidCallback increment;
+  final VoidCallback decrement;
+
+  const SelectButton(
+      {Key? key,
+      required this.value,
+      required this.increment,
+      required this.decrement})
+      : super(key: key);
 
   @override
   State<SelectButton> createState() => _SelectButtonState();
@@ -24,9 +30,9 @@ class _SelectButtonState extends State<SelectButton> {
           onPressed: () {
             isSelected = !isSelected;
             if (isSelected) {
-              CountRowState.increment();
+              widget.increment.call();
             } else {
-              CountRowState.decrement();
+              widget.decrement.call();
             }
 
             setState(() {});
