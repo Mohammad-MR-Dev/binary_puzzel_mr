@@ -13,4 +13,4 @@ jobs:
       - uses: subosito/flutter-action@v1
       - uses: erickzanardo/flutter-gh-pages@v7
         with:
-          baseHred: /binary_puzzel_mr/
+          baseHred: /binary_puzzel_mr/lib/
