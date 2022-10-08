@@ -12,7 +12,7 @@ class StartScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Hi , Rinad Happy birthday :)'),
+            const Text('Hi , Rinad  :)'),
             const SizedBox(height: 10.0),
             OutlinedButton(
                 onPressed: () {
